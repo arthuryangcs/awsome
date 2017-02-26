@@ -1,2 +1,3 @@
 # awsome
-my config
+
+My config.
