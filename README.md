@@ -1,0 +1,2 @@
+# awsome
+my config
