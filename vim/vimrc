@@ -76,6 +76,12 @@ filetype plugin on
 "启动智能补全
 filetype plugin indent on
 
+"撤销
+set undofile
+
+"文件到上次编辑的位置
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif  
+
 " leader 键
 let mapleader = ","
 
