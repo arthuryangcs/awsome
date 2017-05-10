@@ -111,7 +111,7 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'trusktr/seti.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Raimondi/delimitMate'
-Plugin'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 
 call vundle#end()
