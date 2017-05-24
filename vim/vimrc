@@ -148,11 +148,14 @@ nnoremap <leader>gd :YcmDiags<CR>
 set hidden " 避免必须保存修改才可以跳转buffer
 
 " buffer快速导航
-nnoremap <Leader>b :bp<CR>
-nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>p :bp<CR>
+nnoremap <Leader>n :bn<CR>
 
 " 查看buffers
 nnoremap <Leader>l :ls<CR>
+
+" 关闭buffers
+nnoremap <Leader>d :bd<CR>
 
 " 通过索引快速跳转
 nnoremap <Leader>1 :1b<CR>
