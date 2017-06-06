@@ -43,7 +43,7 @@ syntax on
 set t_Co=256
 
 "设置搜索时忽略大小写
-set ignorecase
+set ignorecase smartcase
 
 "设置在Vim中可以使用鼠标 防止在Linux终端下无法拷贝
 set mouse=a
@@ -127,7 +127,8 @@ let NERDTreeQuitOnOpen=1
 
 "airline 配置
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
+" tabline 显示编号
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_theme='molokai'
 set laststatus=2
 
@@ -159,16 +160,16 @@ nnoremap <Leader>l :ls<CR>
 nnoremap <Leader>d :bd<CR>
 
 " 通过索引快速跳转
-nnoremap <Leader>1 :1b<CR>
-nnoremap <Leader>2 :2b<CR>
-nnoremap <Leader>3 :3b<CR>
-nnoremap <Leader>4 :4b<CR>
-nnoremap <Leader>5 :5b<CR>
-nnoremap <Leader>6 :6b<CR>
-nnoremap <Leader>7 :7b<CR>
-nnoremap <Leader>8 :8b<CR>
-nnoremap <Leader>9 :9b<CR>
-nnoremap <Leader>0 :10b<CR>
+"nnoremap <Leader>1 :1b<CR>
+"nnoremap <Leader>2 :2b<CR>
+"nnoremap <Leader>3 :3b<CR>
+"nnoremap <Leader>4 :4b<CR>
+"nnoremap <Leader>5 :5b<CR>
+"nnoremap <Leader>6 :6b<CR>
+"nnoremap <Leader>7 :7b<CR>
+"nnoremap <Leader>8 :8b<CR>
+"nnoremap <Leader>9 :9b<CR>
+"nnoremap <Leader>0 :10b<CR>
 
 "<leader>cc   加注释
 "<leader>cu   解开注释
