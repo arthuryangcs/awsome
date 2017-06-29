@@ -95,6 +95,9 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " leader 键
 let mapleader = ","
 
+"距离顶部和底部5行
+set scrolloff=5
+
 "Vundle 配置
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -114,6 +117,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'tell-k/vim-autopep8'
 
 call vundle#end()
 filetype plugin indent on
@@ -124,6 +128,9 @@ let g:NERDTreeDirArrowExpandable = '>'
 let g:NERDTreeDirArrowCollapsible = 'v'
 "NERDTree中打开文件后自动关闭NERDTree窗口
 let NERDTreeQuitOnOpen=1 
+
+"NERDTree 中忽略的文件类型
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 
 "airline 配置
 let g:airline#extensions#tabline#enabled = 1
@@ -182,3 +189,5 @@ colorscheme molokai
 let g:rehash256 = 1
 let g:molokai_original = 1
 
+"autopep8设置"
+let g:autopep8_disable_show_diff=1
