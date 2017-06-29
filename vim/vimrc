@@ -109,8 +109,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'mattn/emmet-vim'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'trusktr/seti.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Raimondi/delimitMate'
@@ -118,6 +116,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tell-k/vim-autopep8'
+Plugin 'kien/ctrlp.vim'
+Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()
 filetype plugin indent on
@@ -180,14 +180,18 @@ nnoremap <Leader>d :bd<CR>
 "nnoremap <Leader>9 :9b<CR>
 "nnoremap <Leader>0 :10b<CR>
 
-"<leader>cc   加注释
-"<leader>cu   解开注释
-"<leader>c<space>  加上/解开注释, 智能判断
-"<leader>cy   先复制, 再注解(p可以进行黏贴)
-
 colorscheme molokai
 let g:rehash256 = 1
 let g:molokai_original = 1
 
 "autopep8设置"
 let g:autopep8_disable_show_diff=1
+
+" 注释的时候自动加个空格, 强迫症必配
+let g:NERDSpaceDelims=1
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|jpg|png|jpeg)$',
+  \ }
