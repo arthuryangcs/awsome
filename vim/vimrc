@@ -12,7 +12,7 @@ set number
 "设置在编辑过程中右下角显示光标的行列信息
 set ruler
 "当一行文字很长时取消换行
-set nowrap
+" set nowrap
 
 "在状态栏显示正在输入的命令
 set showcmd
@@ -147,7 +147,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'majutsushi/tagbar'
+Plugin 'arthuryangcs/tagbar'
+Plugin 'arthuryangcs/vim-bufkill'
 
 call vundle#end()
 filetype plugin indent on
@@ -202,7 +203,7 @@ nnoremap <leader>f :bn<CR>
 nnoremap <leader>l :ls<CR>
 
 " 关闭buffers
-nnoremap <leader>d :bd<CR>
+nnoremap <leader>d :BD<CR>
 
 " 通过索引快速跳转
 "nnoremap <leader>1 :1b<CR>
@@ -232,7 +233,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|jpg|png|jpeg)$',
   \ }
 
-nmap <leader>tb :TagbarOpen j<CR>
+nmap <leader>tb :TagbarOpen fj<CR>
 nmap <leader>tc :TagbarClose<CR>
 " let g:tagbar_autofocus = 1
 let g:tagbar_autoshowtag = 1
