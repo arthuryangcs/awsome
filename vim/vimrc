@@ -243,3 +243,6 @@ let g:tagbar_sort = 0
 
 " select last paste in visual mode
 nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+" 搜索高亮
+set hlsearch
