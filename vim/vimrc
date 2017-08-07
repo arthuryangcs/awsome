@@ -149,6 +149,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'arthuryangcs/tagbar'
 Plugin 'arthuryangcs/vim-bufkill'
+Plugin 'dyng/ctrlsf.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -188,8 +189,8 @@ let g:ycm_confirm_extra_conf=0
 set completeopt=longest,menu
 let g:ycm_python_binary_path = 'python'
 let g:ycm_autoclose_preview_window_after_insertion = 1
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <leader>gf :YcmCompleter FixIt<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gd :YcmDiags<CR>
 
@@ -246,3 +247,10 @@ nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " 搜索高亮
 set hlsearch
+
+" 选择复制模式，关闭其他窗口，关闭行数
+nnoremap <leader>p <C-w>o :set nu!<CR>
+
+" ctrlsf 配置
+nnoremap <leader>cf :CtrlSF<CR>
+nnoremap <leader>ct :CtrlSFToggle<CR>
