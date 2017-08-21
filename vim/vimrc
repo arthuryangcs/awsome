@@ -14,6 +14,9 @@ set ruler
 "当一行文字很长时取消换行
 " set nowrap
 
+" 搜索高亮
+set hlsearch
+
 "在状态栏显示正在输入的命令
 set showcmd
 
@@ -56,7 +59,7 @@ set shiftwidth=4
 set softtabstop=4
 "设置按退格键时可以一次删除4个空格
 set smarttab
-"将Tab键自动转换成空格 真正需要Tab键时使用[Ctrl + V + Tab]
+"将Tab键自动转换成空格 真正需要Tab键时使用[mtrl + V + Tab]
 set expandtab
 
 "设置编码方式
@@ -66,6 +69,8 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
 "设置换行符为unix
 set ff=unix
+
+set hidden " 避免必须保存修改才可以跳转buffer
 
 "检测文件类型
 filetype on
@@ -79,6 +84,15 @@ filetype plugin indent on
 " 文件修改之后自动载入
 set autoread
 
+"文件到上次编辑的位置
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+" leader 键
+let mapleader = ","
+
+"距离顶部和底部5行
+set scrolloff=5
+
 "撤销
 set undofile                " Save undo's after file closes
 " Let's save undo info!
@@ -91,15 +105,6 @@ endif
 set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
-
-"文件到上次编辑的位置
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif  
-
-" leader 键
-let mapleader = ","
-
-"距离顶部和底部5行
-set scrolloff=5
 
 " 代码折叠
 set foldenable
@@ -150,11 +155,13 @@ Plugin 'tpope/vim-repeat'
 Plugin 'arthuryangcs/tagbar'
 Plugin 'arthuryangcs/vim-bufkill'
 Plugin 'dyng/ctrlsf.vim'
+Plugin 'derekwyatt/vim-fswitch'
+Plugin 'sjl/gundo.vim'
 
 call vundle#end()
 filetype plugin indent on
 
-"NERDTree 配置
+"-----------------------------------------------------------------------------------------------------NERDTree 配置
 nmap <leader>ne :NERDTree<CR>
 nmap <leader>nc :NERDTreeClose<CR>
 
@@ -162,11 +169,14 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 "NERDTree中打开文件后自动关闭NERDTree窗口
 " let NERDTreeQuitOnOpen=1
-
 "NERDTree 中忽略的文件类型
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+" 显示隐藏文件
+let NERDTreeShowHidden=1
+" 删除文件时自动删除文件对应 buffer
+let NERDTreeAutoDeleteBuffer=1
 
-"airline 配置
+"----------------------------------------------------------------------------------------------------airline 配置
 let g:airline#extensions#tabline#enabled = 1
 " tabline 显示编号
 "let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -180,7 +190,7 @@ au FileType python let b:delimitMate_nesting_quotes = ['"']
 " 关闭某些类型文件的自动补全
 au FileType mail let b:delimitMate_autoclose = 0
 
-" for ycm
+"----------------------------------------------------------------------------------------------------- for ycm
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
@@ -194,29 +204,9 @@ nnoremap <leader>gf :YcmCompleter FixIt<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gd :YcmDiags<CR>
 
-set hidden " 避免必须保存修改才可以跳转buffer
-
-" buffer快速导航
-nnoremap <leader>b :bp<CR>
-nnoremap <leader>f :bn<CR>
-
-" 查看buffers
-nnoremap <leader>l :ls<CR>
-
-" 关闭buffers
-nnoremap <leader>d :BD<CR>
-
-" 通过索引快速跳转
-"nnoremap <leader>1 :1b<CR>
-"nnoremap <leader>2 :2b<CR>
-"nnoremap <leader>3 :3b<CR>
-"nnoremap <leader>4 :4b<CR>
-"nnoremap <leader>5 :5b<CR>
-"nnoremap <leader>6 :6b<CR>
-"nnoremap <leader>7 :7b<CR>
-"nnoremap <leader>8 :8b<CR>
-"nnoremap <leader>9 :9b<CR>
-"nnoremap <leader>0 :10b<CR>
+"----------------------------------------------------------------------------------------------------- gundo 配置
+" 调用 gundo 树
+nnoremap <Leader>ud :GundoToggle<CR>
 
 colorscheme molokai
 let g:rehash256 = 1
@@ -242,15 +232,56 @@ let g:tagbar_width = 40
 let g:tagbar_zoomwidth = 0
 let g:tagbar_sort = 0
 
+" buffer快速导航
+nnoremap <leader>b :bp<CR>
+nnoremap <leader>f :bn<CR>
+
+" 查看buffers
+nnoremap <leader>l :ls<CR>
+
+" 关闭buffers
+nnoremap <leader>d :BD<CR>
+
+" 通过索引快速跳转
+"nnoremap <leader>1 :1b<CR>
+"nnoremap <leader>2 :2b<CR>
+"nnoremap <leader>3 :3b<CR>
+"nnoremap <leader>4 :4b<CR>
+"nnoremap <leader>5 :5b<CR>
+"nnoremap <leader>6 :6b<CR>
+"nnoremap <leader>7 :7b<CR>
+"nnoremap <leader>8 :8b<CR>
+"nnoremap <leader>9 :9b<CR>
+"nnoremap <leader>0 :10b<CR>
+
 " select last paste in visual mode
 nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
-
-" 搜索高亮
-set hlsearch
 
 " 选择复制模式，关闭其他窗口，关闭行数
 nnoremap <leader>p <C-w>o :set nu!<CR>
 
 " ctrlsf 配置
-nnoremap <leader>cf :CtrlSF<CR>
+nmap <leader>cf :CtrlSF<CR>
+vmap <leader>cf <Plug>CtrlSFVwordExec
 nnoremap <leader>ct :CtrlSFToggle<CR>
+
+" 一键编译
+nmap <Leader>m :wa<CR>:make<CR><CR>:cw<CR>
+
+" " 关闭当前分割窗口
+" nmap <Leader>q :q<CR>
+
+" " 保存当前窗口内容
+" nmap <Leader>w :w<CR>
+
+" " 保存关闭当前窗口
+" nmap <Leader>x :x<CR>
+
+" 复制模式
+nnoremap <leader>p :set paste!<CR>
+
+" 让配置变更立即生效
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" *.cpp 和 *.h 间切换
+nmap <silent> <Leader>sw :FSHere<cr>
