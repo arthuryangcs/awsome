@@ -1,6 +1,35 @@
-"==================================
-""    Vim基本配置
-"===================================
+"-----------------------------------------------------------------------------------------------------Vundle 配置
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tomasr/molokai'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'trusktr/seti.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'fatih/vim-go'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tell-k/vim-autopep8'
+Plugin 'kien/ctrlp.vim'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'arthuryangcs/tagbar'
+Plugin 'arthuryangcs/vim-bufkill'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'derekwyatt/vim-fswitch'
+Plugin 'sjl/gundo.vim'
+
+call vundle#end()
+filetype plugin indent on
+
+"------------------------------------------------------------------------------------------------------ 基本配置
 
 "关闭vi的一致性模式 避免以前版本的一些Bug和局限
 set nocompatible
@@ -27,10 +56,6 @@ set history=1000
 set nobackup
 set noswapfile
 
-"突出现实当前行列
-set cursorline
-"set cursorcolumn
-
 "设置匹配模式 类似当输入一个左括号时会匹配相应的那个右括号
 set showmatch
 
@@ -42,8 +67,17 @@ set cindent
 syntax enable
 syntax on
 
+colorscheme molokai
+let g:rehash256 = 1
+let g:molokai_original = 1
+
 "指定配色方案为256色
 set t_Co=256
+
+"突出现实当前行列
+set cursorline
+"set cursorcolumn
+highlight CursorLine   cterm=NONE ctermbg=238 ctermfg=NONE guibg=NONE guifg=NONE
 
 "设置搜索时忽略大小写
 set ignorecase smartcase
@@ -130,37 +164,6 @@ fun! ToggleFold()
     endif
 endfun
 
-"Vundle 配置
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tomasr/molokai'
-Plugin 'scrooloose/nerdtree' 
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'trusktr/seti.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'fatih/vim-go'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'kien/ctrlp.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'arthuryangcs/tagbar'
-Plugin 'arthuryangcs/vim-bufkill'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'sjl/gundo.vim'
-
-call vundle#end()
-filetype plugin indent on
-
 "-----------------------------------------------------------------------------------------------------NERDTree 配置
 nmap <leader>ne :NERDTree<CR>
 nmap <leader>nc :NERDTreeClose<CR>
@@ -208,10 +211,6 @@ nnoremap <leader>gd :YcmDiags<CR>
 " 调用 gundo 树
 nnoremap <Leader>ud :GundoToggle<CR>
 
-colorscheme molokai
-let g:rehash256 = 1
-let g:molokai_original = 1
-
 "autopep8设置"
 let g:autopep8_disable_show_diff=1
 
@@ -258,7 +257,7 @@ nnoremap <leader>d :BD<CR>
 nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " 选择复制模式，关闭其他窗口，关闭行数
-nnoremap <leader>p <C-w>o :set nu!<CR>
+nnoremap <leader>y <C-w>o :set nu!<CR>
 
 " ctrlsf 配置
 nmap <leader>cf :CtrlSF<CR>
@@ -266,7 +265,10 @@ vmap <leader>cf <Plug>CtrlSFVwordExec
 nnoremap <leader>ct :CtrlSFToggle<CR>
 
 " 一键编译
-nmap <Leader>m :wa<CR>:make<CR><CR>:cw<CR>
+nmap <Leader>m :wa<CR>:make<CR><CR>:botright cwindow<CR>
+nmap <Leader>w :botright cwindow<CR>
+nmap <leader>j :cn<CR>
+nmap <leader>k :cp<CR>
 
 " " 关闭当前分割窗口
 " nmap <Leader>q :q<CR>
@@ -278,7 +280,7 @@ nmap <Leader>m :wa<CR>:make<CR><CR>:cw<CR>
 " nmap <Leader>x :x<CR>
 
 " 复制模式
-nnoremap <leader>p :set paste!<CR>
+nnoremap <leader>; :set paste!<CR>
 
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
