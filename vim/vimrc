@@ -25,6 +25,8 @@ Plugin 'arthuryangcs/vim-bufkill'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'sjl/gundo.vim'
+" Plugin 'scrooloose/syntastic'
+Plugin 'arthuryangcs/vim-polyglot'
 
 call vundle#end()
 filetype plugin indent on
@@ -117,6 +119,7 @@ filetype plugin indent on
 
 " 文件修改之后自动载入
 set autoread
+au CursorHold * checktime
 
 "文件到上次编辑的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -211,7 +214,20 @@ nnoremap <leader>gd :YcmDiags<CR>
 " 调用 gundo 树
 nnoremap <Leader>ud :GundoToggle<CR>
 
-"autopep8设置"
+" ----------------------------------------------------------------------------------------------------- syntastic 配置
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+" let g:syntastic_python_checkers = ['pylint']
+" let g:syntastic_go_checkers = ['gofmt', 'go', 'gofmt', 'gometalinter', 'govet']
+
+" ----------------------------------------------------------------------------------------------------- autopep8设置
 let g:autopep8_disable_show_diff=1
 
 " 注释的时候自动加个空格, 强迫症必配
