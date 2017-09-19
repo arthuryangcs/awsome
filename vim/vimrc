@@ -24,9 +24,12 @@ Plugin 'arthuryangcs/tagbar'
 Plugin 'arthuryangcs/vim-bufkill'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'derekwyatt/vim-fswitch'
-Plugin 'sjl/gundo.vim'
+Plugin 'sjl/gundo.vim'                              " 树形显示 undo 操作
 " Plugin 'scrooloose/syntastic'
 Plugin 'arthuryangcs/vim-polyglot'
+Plugin 'ShowTrailingWhitespace'                     " 显示行尾的空白字符
+Plugin 'luochen1990/rainbow'                        " 彩虹括号
+Plugin 'tpope/vim-fugitive'                         " Git 文件修改提示
 
 call vundle#end()
 filetype plugin indent on
@@ -303,3 +306,15 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " *.cpp 和 *.h 间切换
 nmap <silent> <Leader>sw :FSHere<cr>
+
+" 降低更新时间
+set updatetime=500
+
+" 开启彩虹括号
+let g:rainbow_active = 1
+
+" ------------------------------------------------------------------------------------------------------ Fugitive 相关配置
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gl :Glog<CR>
