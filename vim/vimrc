@@ -10,7 +10,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'trusktr/seti.vim'
-Plugin 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-multiple-cursors'               " 多行编辑
 Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
@@ -30,6 +30,10 @@ Plugin 'arthuryangcs/vim-polyglot'
 Plugin 'ShowTrailingWhitespace'                     " 显示行尾的空白字符
 Plugin 'luochen1990/rainbow'                        " 彩虹括号
 Plugin 'tpope/vim-fugitive'                         " Git 文件修改提示
+Plugin 'w0rp/ale'                                   " 异步代码检测工具
+Plugin 'mileszs/ack.vim'                            " 代码搜索
+Plugin 'airblade/vim-gitgutter'                     " Git diff
+
 
 call vundle#end()
 filetype plugin indent on
@@ -316,5 +320,20 @@ let g:rainbow_active = 1
 " ------------------------------------------------------------------------------------------------------ Fugitive 相关配置
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gf :Gdiff<CR>
 nnoremap <leader>gl :Glog<CR>
+
+" ----------------------------------------------------------------------------------------------------- ale 相关配置
+" 保持侧边栏可见
+let g:ale_sign_column_always = 1
+" 自定义跳转错误行
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+
+" ----------------------------------------------------------------------------------------------------- ack 相关配置
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
