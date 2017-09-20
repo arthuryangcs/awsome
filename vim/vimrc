@@ -1,41 +1,40 @@
 "-----------------------------------------------------------------------------------------------------Vundle 配置
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/bundle')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tomasr/molokai'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'trusktr/seti.vim'
-Plugin 'terryma/vim-multiple-cursors'               " 多行编辑
-Plugin 'Raimondi/delimitMate'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'fatih/vim-go'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'kien/ctrlp.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'arthuryangcs/tagbar'
-Plugin 'arthuryangcs/vim-bufkill'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'sjl/gundo.vim'                              " 树形显示 undo 操作
-" Plugin 'scrooloose/syntastic'
-Plugin 'arthuryangcs/vim-polyglot'
-Plugin 'ShowTrailingWhitespace'                     " 显示行尾的空白字符
-Plugin 'luochen1990/rainbow'                        " 彩虹括号
-Plugin 'tpope/vim-fugitive'                         " Git 文件修改提示
-Plugin 'w0rp/ale'                                   " 异步代码检测工具
-Plugin 'mileszs/ack.vim'                            " 代码搜索
-Plugin 'airblade/vim-gitgutter'                     " Git diff
+Plug 'VundleVim/Vundle.vim'
+Plug 'tomasr/molokai'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'trusktr/seti.vim'
+Plug 'terryma/vim-multiple-cursors'               " 多行编辑
+Plug 'Raimondi/delimitMate'
+Plug 'Valloric/YouCompleteMe'
+Plug 'fatih/vim-go'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tell-k/vim-autopep8'
+Plug 'kien/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'arthuryangcs/tagbar'
+Plug 'arthuryangcs/vim-bufkill'
+Plug 'dyng/ctrlsf.vim'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'sjl/gundo.vim'                              " 树形显示 undo 操作
+" Plug 'scrooloose/syntastic'
+Plug 'arthuryangcs/vim-polyglot'
+Plug 'vim-scripts/ShowTrailingWhitespace'         " 显示行尾的空白字符
+Plug 'luochen1990/rainbow'                        " 彩虹括号
+Plug 'tpope/vim-fugitive'                         " Git 文件修改提示
+Plug 'w0rp/ale'                                   " 异步代码检测工具
+Plug 'mileszs/ack.vim'                            " 代码搜索
+Plug 'airblade/vim-gitgutter'                     " Git diff
 
-
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 
 "------------------------------------------------------------------------------------------------------ 基本配置
@@ -175,6 +174,8 @@ fun! ToggleFold()
 endfun
 
 "-----------------------------------------------------------------------------------------------------NERDTree 配置
+" open NERDTree and move the cursor to the file editing area
+au VimEnter *  NERDTree | wincmd p
 nmap <leader>ne :NERDTree<CR>
 nmap <leader>nc :NERDTreeClose<CR>
 
@@ -188,6 +189,8 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowHidden=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "----------------------------------------------------------------------------------------------------airline 配置
 let g:airline#extensions#tabline#enabled = 1
@@ -246,6 +249,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|jpg|png|jpeg)$',
   \ }
 
+nmap <leader>tt :TagbarOpenAutoClose<CR>
 nmap <leader>tb :TagbarOpen fj<CR>
 nmap <leader>tc :TagbarClose<CR>
 " let g:tagbar_autofocus = 1
@@ -329,7 +333,6 @@ let g:ale_sign_column_always = 1
 " 自定义跳转错误行
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
 
 " ----------------------------------------------------------------------------------------------------- ack 相关配置
 if executable('ag')
