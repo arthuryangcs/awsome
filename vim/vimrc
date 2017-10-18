@@ -89,6 +89,7 @@ highlight CursorLine   cterm=NONE ctermbg=238 ctermfg=NONE guibg=NONE guifg=NONE
 set ignorecase smartcase
 
 "设置在Vim中可以使用鼠标 防止在Linux终端下无法拷贝
+set ttymouse=xterm2
 set mouse=a
 
 "设置Tab宽度
