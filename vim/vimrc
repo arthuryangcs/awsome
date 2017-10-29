@@ -29,8 +29,13 @@ Plug 'tpope/vim-fugitive'                           " Git 文件修改提示
 Plug 'mileszs/ack.vim'                              " 代码搜索
 Plug 'airblade/vim-gitgutter'                       " Git diff
 Plug 'SirVer/ultisnips'                             " 模板补全
-" Plug 'w0rp/ale'                                     " 异步代码检测工具
+Plug 'w0rp/ale'                                   " 异步代码检测工具
 " Plug 'tell-k/vim-autopep8'
+" text object
+Plug 'kana/vim-textobj-user' 						" 支持自定义文本对象
+Plug 'kana/vim-textobj-line'  						" 增加行文本对象: l   dal yal cil
+Plug 'kana/vim-textobj-entire' 						" 增加文件文本对象: e   dae yae cie
+Plug 'kana/vim-textobj-indent' 						" 增加缩进文本对象: i   dai yai cii - 相同缩进属于同一块
 
 call plug#end()
 filetype plugin indent on
@@ -334,9 +339,29 @@ nnoremap <leader>gl :Glog<CR>
 " ----------------------------------------------------------------------------------------------------- ale 相关配置
 " 保持侧边栏可见
 let g:ale_sign_column_always = 1
+" 保存时自动修复
+let g:ale_fix_on_save = 1
+" 显示错误信息在 airline
+let g:airline#extensions#ale#enabled = 1
 " 自定义跳转错误行
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let g:ale_fixers = {
+\   'python': ['autopep8', 'isort', 'remove_trailing_lines', 'trim_whitespace'],
+\}
+
+let g:ale_linters = {
+\   'go': ['go build', 'gofmt', 'golint', 'go vet'],
+\}
+
+
+" Python 配置
+let g:ale_python_flake8_options = '--ignore E501'
+let g:ale_python_pylint_options = '--disable C0301,C0111,C0103,E1305,R0914'
+
+" Golang 配置
+
 
 " ----------------------------------------------------------------------------------------------------- ack 相关配置
 if executable('ag')
