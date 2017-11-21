@@ -20,7 +20,7 @@ Plug 'tpope/vim-surround'                           " 修改包围符号
 Plug 'tpope/vim-repeat'                             " 插件支持 . 重复操作
 Plug 'arthuryangcs/tagbar'                          " 代码结构
 Plug 'arthuryangcs/vim-bufkill'                     " 关闭 buff
-Plug 'dyng/ctrlsf.vim'                              " 文件间搜
+Plug 'dyng/ctrlsf.vim'                              " 文件间搜索
 Plug 'sjl/gundo.vim'                                " 树形显示 undo 操作
 Plug 'arthuryangcs/vim-polyglot'                    " 多语言高亮
 Plug 'vim-scripts/ShowTrailingWhitespace'           " 显示行尾的空白字符
@@ -29,8 +29,7 @@ Plug 'tpope/vim-fugitive'                           " Git 文件修改提示
 Plug 'mileszs/ack.vim'                              " 代码搜索
 Plug 'airblade/vim-gitgutter'                       " Git diff
 Plug 'SirVer/ultisnips'                             " 模板补全
-Plug 'w0rp/ale'                                   " 异步代码检测工具
-" Plug 'tell-k/vim-autopep8'
+Plug 'w0rp/ale'                                     " 异步代码检测工具
 " text object
 Plug 'kana/vim-textobj-user' 						" 支持自定义文本对象
 Plug 'kana/vim-textobj-line'  						" 增加行文本对象: l   dal yal cil
@@ -88,7 +87,7 @@ set t_Co=256
 "突出现实当前行列
 set cursorline
 "set cursorcolumn
-highlight CursorLine   cterm=NONE ctermbg=238 ctermfg=NONE guibg=NONE guifg=NONE
+highlight CursorLine cterm=NONE ctermbg=238 ctermfg=NONE guibg=NONE guifg=NONE
 
 "设置搜索时忽略大小写
 set ignorecase smartcase
@@ -214,22 +213,29 @@ au FileType mail let b:delimitMate_autoclose = 0
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+
 "打开vim时不再询问是否加载ycm_extra_conf.py配置"
 let g:ycm_confirm_extra_conf=0
+
 set completeopt=longest,menu
-let g:ycm_python_binary_path = 'python'
+
+let g:ycm_python_binary_path = '/usr/bin/python'
+
+let g:ycm_seed_identifiers_with_syntax = 1
+
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+
 nnoremap <leader>yf :YcmCompleter FixIt<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>yd :YcmDiags<CR>
 
-" 防止和 UltiSnips 冲突
-let g:ycm_key_list_select_completion = ['', '']
-let g:ycm_key_list_previous_completion = ['']
+" " 防止和 UltiSnips 冲突
+" let g:ycm_key_list_select_completion = ['', '']
+" let g:ycm_key_list_previous_completion = []
 let g:ycm_key_invoke_completion = '<C-Space>'
 
-"----------------------------------------------------------------------------------------------------- gundo 配置
+"------------------------------------------------------------------------------------------------------ gundo 配置
 " 调用 gundo 树
 nnoremap <Leader>ud :GundoToggle<CR>
 
@@ -348,20 +354,23 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 let g:ale_fixers = {
-\   'python': ['autopep8', 'isort', 'remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['autopep8', 'isort', 'remove_trailing_lines', 'trim_whitespace', 'add_blank_lines_for_python_control_statements'],
 \}
 
 let g:ale_linters = {
-\   'go': ['go build', 'gofmt', 'golint', 'go vet'],
+\   'go': ['go build'],
+\   'python': ['flake8', 'mypy', 'pycodestyle', 'pylint'],
 \}
 
-
 " Python 配置
-let g:ale_python_flake8_options = '--ignore E501'
-let g:ale_python_pylint_options = '--disable C0301,C0111,C0103,E1305,R0914'
+let g:ale_python_flake8_options = '--ignore E501,E402'
+let g:ale_python_autopep8_options = '--ignore E501,E402'
+let g:ale_python_pycodestyle_options = '--ignore E501,E402'
+let g:ale_python_pylint_options = '--disable C0301,C0111,C0103,E1305,R0914,W0703 --load-plugins MySQLdb'
+let g:ale_python_mypy_options = '--mypy_suppress_stub_warnings --cache_dir ~/.vim/mypy_cache/'
 
 " Golang 配置
-
+let g:ale_go_gometalinter_options = '--disable vetshadow --disable lll'
 
 " ----------------------------------------------------------------------------------------------------- ack 相关配置
 if executable('ag')
