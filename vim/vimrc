@@ -180,6 +180,9 @@ fun! ToggleFold()
     endif
 endfun
 
+" 状态栏不显示当前模式，防止阻挡其他信息
+set noshowmode
+
 "-----------------------------------------------------------------------------------------------------NERDTree 配置
 nmap <leader>ne :let NERDTreeQuitOnOpen=0<CR>:NERDTree<CR>
 nmap <leader>nn :let NERDTreeQuitOnOpen=1<CR>:NERDTree<CR>
