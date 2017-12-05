@@ -30,6 +30,7 @@ Plug 'mileszs/ack.vim'                              " 代码搜索
 Plug 'airblade/vim-gitgutter'                       " Git diff
 Plug 'SirVer/ultisnips'                             " 模板补全
 Plug 'w0rp/ale'                                     " 异步代码检测工具
+Plug 'skywind3000/asyncrun.vim' 					" 异步执行
 " text object
 Plug 'kana/vim-textobj-user' 						" 支持自定义文本对象
 Plug 'kana/vim-textobj-line'  						" 增加行文本对象: l   dal yal cil
@@ -180,7 +181,8 @@ fun! ToggleFold()
 endfun
 
 "-----------------------------------------------------------------------------------------------------NERDTree 配置
-nmap <leader>ne :NERDTree<CR>
+nmap <leader>ne :let NERDTreeQuitOnOpen=0<CR>:NERDTree<CR>
+nmap <leader>nn :let NERDTreeQuitOnOpen=1<CR>:NERDTree<CR>
 nmap <leader>nc :NERDTreeClose<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -192,8 +194,8 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowHidden=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
-" open NERDTree and move the cursor to the file editing area
-au VimEnter *  NERDTree | wincmd p
+" " open NERDTree and move the cursor to the file editing area
+" au VimEnter *  NERDTree | wincmd p
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -364,7 +366,7 @@ let g:ale_linters = {
 
 " Python 配置
 let g:ale_python_flake8_options = '--ignore E501,E402'
-let g:ale_python_autopep8_options = '--ignore E501,E402'
+let g:ale_python_autopep8_options = '--ignore E501,E402,E401'
 let g:ale_python_pycodestyle_options = '--ignore E501,E402'
 let g:ale_python_pylint_options = '--disable C0301,C0111,C0103,E1305,R0914,W0703 --load-plugins MySQLdb'
 let g:ale_python_mypy_options = '--mypy_suppress_stub_warnings --cache_dir ~/.vim/mypy_cache/'
