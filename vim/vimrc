@@ -144,9 +144,6 @@ let mapleader = ","
 "距离顶部和底部5行
 set scrolloff=5
 
-" 设置光标到屏幕中心
-nnoremap <Leader>ss :let &scrolloff=999-&scrolloff<CR> :let &scrolloff=999-&scrolloff<CR>
-
 "撤销
 set undofile                " Save undo's after file closes
 " Let's save undo info!
