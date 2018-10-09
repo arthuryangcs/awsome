@@ -20,7 +20,7 @@ Plug 'tpope/vim-surround'                 " 修改包围符号
 Plug 'tpope/vim-repeat'                   " 插件支持 . 重复操作
 Plug 'arthuryangcs/tagbar'                " 代码结构
 Plug 'arthuryangcs/vim-bufkill'           " 关闭 buff
-Plug 'dyng/ctrlsf.vim'                    " 文件间搜索
+Plug 'dyng/ctrlsf.vim'                    " 文件间搜索, 新版本不能用，要 git reset --hard 184b22fe0fc6eb73e9093a624630520938f77cc8
 Plug 'sjl/gundo.vim'                      " 树形显示 undo 操作
 Plug 'arthuryangcs/vim-polyglot'          " 多语言高亮
 Plug 'vim-scripts/ShowTrailingWhitespace' " 显示行尾的空白字符
