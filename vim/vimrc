@@ -232,7 +232,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
-" let g:ycm_cache_omnifunc=0
+let g:ycm_cache_omnifunc=0
 let g:ycm_seed_identifiers_with_syntax = 1
 "在注释输入中也能补全
 let g:ycm_complete_in_comments = 1
@@ -250,6 +250,12 @@ nnoremap <leader>yd :YcmDiags<CR>
 " let g:ycm_key_list_previous_completion = []
 let g:ycm_key_invoke_completion = '<C-Space>'
 
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+let g:ycm_max_num_candidates = 0
+let g:ycm_max_num_identifier_candidates = 0
+let g:ycm_disable_for_files_larger_than_kb = 0
+
 "------------------------------------------------------------------------------------------------------ gundo 配置
 " 调用 gundo 树
 nnoremap <Leader>ud :GundoToggle<CR>
@@ -262,7 +268,7 @@ nnoremap <Leader>ud :GundoToggle<CR>
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
+" let g:syntastic_check_on_wq = C
 
 " let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_go_checkers = []
